@@ -1,0 +1,35 @@
+{
+    "panelDetailsTitle": "Détails du meeting",
+    "panelNoNoteSelected": "Pas de note sélectionnée",
+    "panelNotAUpmeetNote": "Ne semble pas être une note Upmeet",
+    "panelDetailMeetingID": "ID Réunion : ",
+    "panelDetailAuthor": "Auteur : ",
+    "panelDetailCreated": "Créée le : ",
+    "panelDetailProcessed": "Traitée le : ",
+    "panelDetailTags": "Tags : ",
+
+    "panelButtonSync": "Sync les réunions",
+
+    "upmeetToken": "Token Upmeet",
+    "upmeetTokenDesc": "Le token Upmeet est utilisé pour authentifier les requêtes vers l'API Upmeet. Il peut être trouvé dans les paramètres de votre compte Upmeet.",
+    "upmeetTokenPlaceholder": "Entrez votre token Upmeet ici",
+    "upmeetFolder": "Dossier des notes",
+    "upmeetFolderDesc": "Le dossier où les notes Upmeet seront stockées. Si le dossier n'existe pas, il sera créé.",
+    "upmeetFolderPlaceholder": "Entrez le chemin du dossier pour les notes Upmeet",
+    "upmeetLastSyncDate": "Date de dernière synchronisation",
+    "upmeetLastSyncDateDesc": "La date et l'heure de la dernière note synchronisée avec Upmeet. Format ISO (2023-10-01T12:00:00Z). Ne devrait psa être modifié manuellement.",
+    "upmeetLastSyncDatePlaceholder": "2000-01-01T00:00:00Z",
+    "upmeetTemplate": "Modèle de note",
+    "upmeetTemplateDesc": "Le modèle de note utilisé pour les notes Upmeet. Le modèle doit être un fichier Markdown valide et peut contenir des variables comme {{title}}, {{date}}, {{time}}, etc.",
+    "upmeetTemplatePlaceholder": "Entrez le chemin du modèle de note pour Upmeet",
+    "upmeetOverwrite": "Écraser les notes existantes",
+    "upmeetOverwriteDesc": "Si activé, les notes existantes seront écrasées lors de la synchronisation avec Upmeet. Si désactivé, les notes existantes ne seront pas modifiées.",
+
+    "noticeSyncStarting": "Synchronisation avec Upmeet en cours...",
+    "noticeSyncCompleted": "Synchronisation avec Upmeet terminée.",
+    "noticeFileAltreadyExistsSkip": "Le fichier existe déjà et va être passé : ",
+    "noticeUpmeetConnectionError": "Échec de la récupération des réunions depuis l'API Upmeet. Veuillez consulter la console pour plus de détails.",
+    "noticeNewMeetingsFound": "Nouvelles réunions trouvées : ",
+
+    "defaultNoteContent": "Tags: {{tags}}\n\n# Résumé:\n\n{{summary}}\n\n---\n# Transcription:\n\n{{transcription}}"
+}
