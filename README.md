@@ -1,6 +1,6 @@
 # obsidian-upmeet-plugin
 
-[Upmeet.ai](https://upmeet.ai) is a amazing to to to transcripts and summaries of your meeting. But you may need to syncrhonize upmeet data with your [Obsidian](https://obsidian.md/) vault.
+[Upmeet.ai](https://upmeet.ai) is a amazing tool to do transcripts and summaries of your meetings with a strong AI engine. But you may need to syncrhonize upmeet data with your [Obsidian](https://obsidian.md/) vault.
 This plugin is dediacted to this task.
 
 
