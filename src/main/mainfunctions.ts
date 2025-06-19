@@ -103,9 +103,7 @@ export async function syncNotes(plugin: GolUpmeetPlugin): Promise<void> {
         .replace("{{summary}}", meeting.summary)
         .replace("{{transcription}}", meeting.transcription)
         .replace("{{tags}}", meeting.tags.join(", ")); // Join tags with a comma
-
-      // Add meetingID info (hidden in the template)
-      
+     
       // Create a new note for the meeting
       console.log(`Creating note for meeting: ${meeting.id} - ${meeting.name}`);
       createNewNote(plugin, meeting.name, noteContent);

@@ -17,7 +17,7 @@ function updateDetailsfromPanel(item: upmeetPanelView, file?: TFile) {
         
         // Check if a file is provided, if not, we display a message
         if(!file) {
-            detailsContentDiv.innerHTML= t(item.language,"panelNotNoteSelected");
+            detailsContentDiv.createEl('small', { text: t(item.language,"panelNotNoteSelected")});
             return;
         }
 
@@ -26,17 +26,16 @@ function updateDetailsfromPanel(item: upmeetPanelView, file?: TFile) {
         const frontmatter = cache?.frontmatter;
 
         if (! frontmatter?.MeetingID ) {
-            detailsContentDiv.innerHTML= t(item.language,"panelNotAUpmeetNote");
+            detailsContentDiv.createEl('small', { text: t(item.language,"panelNotAUpmeetNote")});;
             return;
         }
 
-        let detailText=t(item.language,"panelDetailMeetingID" )+`${frontmatter?.MeetingID ?? "Not Set"}`
-        detailText += `<br />`+t(item.language,"panelDetailAuthor" )+`${frontmatter?.MeetingAuthor ?? "Not set"}`
-        detailText += `<br />`+t(item.language,"panelDetailCreated" )+`${frontmatter?.MeetingDate ?? "Not set"}`
-        detailText += `<br />`+t(item.language,"panelDetailProcessed" )+`${frontmatter?.MeetingProcessDate ?? "Not set"}`
-        detailText += `<br />`+t(item.language,"panelDetailTags" )+`${frontmatter?.MeetingTags ?? "No tags"}`
+        detailsContentDiv.createEl('p', { text: t(item.language,"panelDetailMeetingID" )+`${frontmatter?.MeetingID ?? "Not Set"}`,cls: 'my-panel-details-text' });;
+        detailsContentDiv.createEl('p', { text: t(item.language,"panelDetailAuthor" )+`${frontmatter?.MeetingAuthor ?? "Not set"}`,cls: 'my-panel-details-text'});;
+        detailsContentDiv.createEl('p', { text: t(item.language,"panelDetailCreated" )+`${frontmatter?.MeetingDate ?? "Not set"}`,cls: 'my-panel-details-text'});;
+        detailsContentDiv.createEl('p', { text: t(item.language,"panelDetailProcessed" )+`${frontmatter?.MeetingProcessDate ?? "Not set"}`,cls: 'my-panel-details-text'});;
+        detailsContentDiv.createEl('p', { text: t(item.language,"panelDetailTags" )+`${frontmatter?.MeetingTags ?? "No tags"}`,cls: 'my-panel-details-text'});;
         
-        detailsContentDiv.innerHTML = detailText; // Use innerHTML to allow line breaks
     } else {
         console.error("Details div not found in the panel container, shoud be there.")
     }

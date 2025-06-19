@@ -18408,7 +18408,7 @@ async function syncNotes(plugin) {
 `;
     meeting.tags = meeting.tags.map((tag) => `#${tag}`);
     noteContent += templateContent.replace("{{summary}}", meeting.summary).replace("{{transcription}}", meeting.transcription).replace("{{tags}}", meeting.tags.join(", "));
-    console.log(`Creating note for meeting: ${meeting.id} - ${meeting.name}`);
+    console.debug(`Creating note for meeting: ${meeting.id} - ${meeting.name}`);
     createNewNote(plugin, meeting.name, noteContent);
   }
   plugin.settings.upmeetLastSync = lastMeetingDate;

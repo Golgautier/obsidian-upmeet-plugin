@@ -14,8 +14,8 @@ This plugin is dediacted to this task.
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/Golgautier/obsidian-upmeet-plugin/releases) page.
-2. Copy the `.zip` file into your Obsidian vault's `plugins` folder.
-3. Unzip and enable the plugin from Obsidian's settings.
+2. create a folder `unofficial-upmeet` in `.obsidian/plugins` in your vault folder
+3. it's ready !
 
 ## Usage
 

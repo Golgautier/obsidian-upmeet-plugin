@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-upmeet-plugin",
+  "name": "unofficial-upmeet",
   "version": "0.9.1",
   "description": "Obsidian plugin to interact with Upmeet.ai",
   "license": "ISC",
@@ -14,12 +14,12 @@
   "devDependencies": {
     "@types/axios": "^0.14.4",
     "browserify": "^17.0.1",
+    "esbuild": "^0.25.5",
     "obsidian": "^1.8.7",
     "terser": "^5.40.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "axios": "^1.9.0",
-    "esbuild": "^0.25.5"
+    "axios": "^1.9.0"
   }
 }

@@ -2,3 +2,7 @@ DevVault
 data.json
 ToDo.md
 binaries
+SubmitPlugin
+node_modules
+Trash
+*.js

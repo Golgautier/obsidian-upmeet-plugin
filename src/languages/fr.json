@@ -20,7 +20,7 @@
     "upmeetLastSyncDateDesc": "La date et l'heure de la dernière note synchronisée avec Upmeet. Format ISO (2023-10-01T12:00:00Z). Ne devrait psa être modifié manuellement.",
     "upmeetLastSyncDatePlaceholder": "2000-01-01T00:00:00Z",
     "upmeetTemplate": "Modèle de note",
-    "upmeetTemplateDesc": "Le modèle de note utilisé pour les notes Upmeet. Le modèle doit être un fichier Markdown valide et peut contenir des variables comme {{title}}, {{date}}, {{time}}, etc.",
+    "upmeetTemplateDesc": "Le modèle de note utilisé pour les notes Upmeet. Le modèle doit être un fichier Markdown valide et peut contenir des variables comme {{summary}}, {{transcription}}, {{tags}}, etc.",
     "upmeetTemplatePlaceholder": "Entrez le chemin du modèle de note pour Upmeet",
     "upmeetOverwrite": "Écraser les notes existantes",
     "upmeetOverwriteDesc": "Si activé, les notes existantes seront écrasées lors de la synchronisation avec Upmeet. Si désactivé, les notes existantes ne seront pas modifiées.",

@@ -81,8 +81,6 @@ export default class GolUpmeetPlugin extends Plugin {
   }
 
   async onunload() {
-    // Release any resources configured by the plugin.
-    this.app.workspace.detachLeavesOfType(PANEL_NAME);
   }
 
   async loadSettings() {
