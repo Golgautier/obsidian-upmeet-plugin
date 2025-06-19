@@ -1,10 +1,9 @@
 {
 	"id": "unofficial-upmeet",
-	"name": "Unofficial Upmeet Plugin",
+	"name": "Unofficial Upmeet.ai connector",
 	"version": "0.9.1",
 	"minAppVersion": "0.15.0",
-	"description": "Sync your Upmeet.ai meetings to Obsidian.",
-    "longDescription": "This plugin allows you to sync your Upmeet.ai meetings to Obsidian, enabling you to manage and access your meeting notes seamlessly within your vault.",
+	"description": "This plugin allows you to sync your Upmeet.ai meetings to Obsidian, enabling you to manage and access your meeting notes seamlessly within your vault.",
 	"author": "Golgautier",
 	"authorUrl": "https://github.com/Golgautier",
 	"fundingUrl": "https://github.com/Golgautier/obsidian-upmeet-plugin",

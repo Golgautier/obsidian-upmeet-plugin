@@ -14837,13 +14837,13 @@ var import_obsidian4 = require("obsidian");
 // main/icon.ts
 var CUSTOM_ICON_ID = "upmeet-icon";
 var CUSTOM_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
-  <rect x="2" y="2" width="20" height="20" style="stroke: rgb(50, 50, 50); fill-opacity: 0; stroke-width: 2px" y="2" rx="2" ry="2" id="object-0" />
+  <rect x="2" y="2" width="20" height="20" style="stroke: currentcolor; fill-opacity: 0; stroke-width: 2px" y="2" rx="2" ry="2" id="object-0" />
   <g transform="matrix(1, 0, 0, 1, -8.881784197001252e-16, 0)">
-    <line style="stroke: rgb(50, 50, 50); stroke-width: 2px;" x1="6" y1="10" x2="6" y2="14"/>
-    <line style="stroke: rgb(50, 50, 50); stroke-width: 2px;" x1="12" y1="10" x2="12" y2="14"/>
-    <line style="stroke: rgb(50, 50, 50); stroke-width: 2;" x1="18" y1="10" x2="18" y2="14"/>
-    <path d="M 6 10 A 1 1 1 1 1 12 10" style="stroke: rgb(50, 50, 50); stroke-width: 2px; fill-opacity: 0;"/>
-    <path d="M 12 14 C 12 16.309 14.5 17.753 16.5 16.598 C 17.428 16.062 18 15.072 18 14" style="stroke: rgb(50, 50, 50); stroke-width: 2; fill-opacity: 0;"/>
+    <line style="stroke: currentcolor; stroke-width: 2px;" x1="6" y1="10" x2="6" y2="14"/>
+    <line style="stroke: currentcolor; stroke-width: 2px;" x1="12" y1="10" x2="12" y2="14"/>
+    <line style="stroke: currentcolor; stroke-width: 2px;" x1="18" y1="10" x2="18" y2="14"/>
+    <path d="M 6 10 A 1 1 1 1 1 12 10" style="stroke: currentcolor; stroke-width: 2px; fill-opacity: 0;"/>
+    <path d="M 12 14 C 12 16.309 14.5 17.753 16.5 16.598 C 17.428 16.062 18 15.072 18 14" style="stroke: currentcolor; stroke-width: 2; fill-opacity: 0;"/>
   </g>
 </svg>`;
 
@@ -14871,7 +14871,7 @@ var en_default = {
   upmeetLastSyncDateDesc: "The date and time of the last note synchronized with Upmeet. ISO format (2023-10-01T12:00:00Z). Should not be modified manually.",
   upmeetLastSyncDatePlaceholder: "2000-01-01T00:00:00Z",
   upmeetTemplate: "Note template",
-  upmeetTemplateDesc: "The note template used for Upmeet notes. The template must be a valid Markdown file and can contain variables like {{title}}, {{date}}, {{time}}, etc.",
+  upmeetTemplateDesc: "The note template used for Upmeet notes. The template must be a valid Markdown file and can contain variables like {{summary}}, {{transcription}}, {{tags}}, etc.",
   upmeetTemplatePlaceholder: "Enter the path to the note template for Upmeet",
   upmeetOverwrite: "Overwrite existing notes",
   upmeetOverwriteDesc: "If enabled, existing notes will be overwritten during synchronization with Upmeet. If disabled, existing notes will not be modified.",
@@ -14904,7 +14904,7 @@ var fr_default = {
   upmeetLastSyncDateDesc: "La date et l'heure de la derni\xE8re note synchronis\xE9e avec Upmeet. Format ISO (2023-10-01T12:00:00Z). Ne devrait psa \xEAtre modifi\xE9 manuellement.",
   upmeetLastSyncDatePlaceholder: "2000-01-01T00:00:00Z",
   upmeetTemplate: "Mod\xE8le de note",
-  upmeetTemplateDesc: "Le mod\xE8le de note utilis\xE9 pour les notes Upmeet. Le mod\xE8le doit \xEAtre un fichier Markdown valide et peut contenir des variables comme {{title}}, {{date}}, {{time}}, etc.",
+  upmeetTemplateDesc: "Le mod\xE8le de note utilis\xE9 pour les notes Upmeet. Le mod\xE8le doit \xEAtre un fichier Markdown valide et peut contenir des variables comme {{summary}}, {{transcription}}, {{tags}}, etc.",
   upmeetTemplatePlaceholder: "Entrez le chemin du mod\xE8le de note pour Upmeet",
   upmeetOverwrite: "\xC9craser les notes existantes",
   upmeetOverwriteDesc: "Si activ\xE9, les notes existantes seront \xE9cras\xE9es lors de la synchronisation avec Upmeet. Si d\xE9sactiv\xE9, les notes existantes ne seront pas modifi\xE9es.",
@@ -18408,7 +18408,7 @@ async function syncNotes(plugin) {
 `;
     meeting.tags = meeting.tags.map((tag) => `#${tag}`);
     noteContent += templateContent.replace("{{summary}}", meeting.summary).replace("{{transcription}}", meeting.transcription).replace("{{tags}}", meeting.tags.join(", "));
-    console.debug(`Creating note for meeting: ${meeting.id} - ${meeting.name}`);
+    console.log(`Creating note for meeting: ${meeting.id} - ${meeting.name}`);
     createNewNote(plugin, meeting.name, noteContent);
   }
   plugin.settings.upmeetLastSync = lastMeetingDate;
@@ -18445,21 +18445,26 @@ function updateDetailsfromPanel(item, file) {
     detailsDiv.createEl("h4", { text: t(item.language, "panelDetailsTitle") });
     let detailsContentDiv = detailsDiv.createDiv({ cls: "my-panel-details-text" });
     if (!file) {
-      detailsContentDiv.innerHTML = t(item.language, "panelNotNoteSelected");
+      detailsContentDiv.createEl("small", { text: t(item.language, "panelNotNoteSelected") });
       return;
     }
     const cache = item.app.metadataCache.getFileCache(file);
     const frontmatter = cache?.frontmatter;
     if (!frontmatter?.MeetingID) {
-      detailsContentDiv.innerHTML = t(item.language, "panelNotAUpmeetNote");
+      detailsContentDiv.createEl("small", { text: t(item.language, "panelNotAUpmeetNote") });
+      ;
       return;
     }
-    let detailText = t(item.language, "panelDetailMeetingID") + `${frontmatter?.MeetingID ?? "Not Set"}`;
-    detailText += `<br />` + t(item.language, "panelDetailAuthor") + `${frontmatter?.MeetingAuthor ?? "Not set"}`;
-    detailText += `<br />` + t(item.language, "panelDetailCreated") + `${frontmatter?.MeetingDate ?? "Not set"}`;
-    detailText += `<br />` + t(item.language, "panelDetailProcessed") + `${frontmatter?.MeetingProcessDate ?? "Not set"}`;
-    detailText += `<br />` + t(item.language, "panelDetailTags") + `${frontmatter?.MeetingTags ?? "No tags"}`;
-    detailsContentDiv.innerHTML = detailText;
+    detailsContentDiv.createEl("p", { text: t(item.language, "panelDetailMeetingID") + `${frontmatter?.MeetingID ?? "Not Set"}`, cls: "my-panel-details-text" });
+    ;
+    detailsContentDiv.createEl("p", { text: t(item.language, "panelDetailAuthor") + `${frontmatter?.MeetingAuthor ?? "Not set"}`, cls: "my-panel-details-text" });
+    ;
+    detailsContentDiv.createEl("p", { text: t(item.language, "panelDetailCreated") + `${frontmatter?.MeetingDate ?? "Not set"}`, cls: "my-panel-details-text" });
+    ;
+    detailsContentDiv.createEl("p", { text: t(item.language, "panelDetailProcessed") + `${frontmatter?.MeetingProcessDate ?? "Not set"}`, cls: "my-panel-details-text" });
+    ;
+    detailsContentDiv.createEl("p", { text: t(item.language, "panelDetailTags") + `${frontmatter?.MeetingTags ?? "No tags"}`, cls: "my-panel-details-text" });
+    ;
   } else {
     console.error("Details div not found in the panel container, shoud be there.");
   }
@@ -18568,7 +18573,6 @@ var GolUpmeetPlugin = class extends import_obsidian5.Plugin {
     this.addSettingTab(new SampleSettingTab(this.app, this));
   }
   async onunload() {
-    this.app.workspace.detachLeavesOfType(PANEL_NAME);
   }
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
