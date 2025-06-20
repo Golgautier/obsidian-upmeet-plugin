@@ -7,7 +7,7 @@ import { updatePanel, toggleRightPanel } from './main/mainfunctions'; // Import 
 import moment from "moment";
 import { t } from './languages/language'; // Import the translation function
 
-interface MyPluginSettings {
+interface GolUpmeetPluginSettings {
 	upmeetToken: string; // Token for Upmeet API access
   upmeetFolder: string; // Folder where Upmeet notes will be stored
   upmeetLastSync: string; // ISO date string
@@ -15,7 +15,7 @@ interface MyPluginSettings {
   overwriteExistingNotes: boolean; // Optional setting to overwrite existing notes 
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: GolUpmeetPluginSettings = {
 	upmeetToken: 'default',
   upmeetFolder: 'Upmeet',
   upmeetLastSync: '2000-01-01T00:00:00Z', // Default date in the past
@@ -24,7 +24,7 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 }
 
 export default class GolUpmeetPlugin extends Plugin {
-  settings!: MyPluginSettings;
+  settings!: GolUpmeetPluginSettings;
   private currentFile: TFile | null = null;
   language: string ; // Initialize language to null
 
@@ -76,7 +76,7 @@ export default class GolUpmeetPlugin extends Plugin {
     this.addRibbonIcon(CUSTOM_ICON_ID, 'Upmeet', () => { toggleRightPanel(this);  });
 
     // This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new GolUpmeetSettingTab(this.app, this));
 
   }
 
@@ -94,7 +94,7 @@ export default class GolUpmeetPlugin extends Plugin {
 }
 
 
-class SampleSettingTab extends PluginSettingTab {
+class GolUpmeetSettingTab extends PluginSettingTab {
 	plugin: GolUpmeetPlugin;
 
 	constructor(app: App, plugin: GolUpmeetPlugin) {

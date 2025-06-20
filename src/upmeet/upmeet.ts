@@ -1,19 +1,23 @@
-import { Plugin, Notice } from 'obsidian';
-import axios, { Axios } from 'axios';
+import { requestUrl, Notice, RequestUrlParam } from 'obsidian';
 import { Meeting, MeetingfromUpmeet } from './interfaces';
 import GolUpmeetPlugin from '../main';
 import { t } from '../languages/language';
 
 async function getMeetingSummary(meetingId: string, upmeetToken: string): Promise<string> {
-    const url = `https://api.upmeet.ai/meetings/${meetingId}`;
-    const headers = {
-        'Accept': "application/json",
-        'X-Api-Token': upmeetToken
-    };
+    let urlRequest: RequestUrlParam = {
+        url: `https://api.upmeet.ai/meetings/${meetingId}`,
+        headers: {
+            'Accept': "application/json",
+            'X-Api-Token': upmeetToken
+        },
+        method: 'GET',
+    } ;    
 
     try {
-        const response = await axios.get(url, { headers });
-        const meetingData = response.data;
+        const response = await requestUrl(urlRequest).json;
+        const meetingData = response;
+
+        console.log("GL", meetingData)
 
         const summary = meetingData.meeting.summary?.text || "No summary available";
 
@@ -25,15 +29,18 @@ async function getMeetingSummary(meetingId: string, upmeetToken: string): Promis
 }
 
 async function getMeetingTranscription(meetingId: MeetingfromUpmeet, upmeetToken: string): Promise<string> {
-    const url = `https://api.upmeet.ai/meetings/${meetingId}/transcriptions`;
-    const headers = {
-        'Accept': "application/json",
-        'X-Api-Token': upmeetToken
-    };
+    let urlRequest: RequestUrlParam = {
+        url: `https://api.upmeet.ai/meetings/${meetingId}/transcriptions`,
+        headers: {
+            'Accept': "application/json",
+            'X-Api-Token': upmeetToken
+        },
+        method: 'GET',
+    } ;
 
     try {
-        const response = await axios.get(url, { headers });
-        const transcriptionData = response.data;
+        const response = await requestUrl(urlRequest).json;
+        const transcriptionData = response;
 
         return transcriptionData.transcriptions.map((tmp: any) => {
             const speakerName = tmp.speaker ? tmp.speaker.name : "Unknown";
@@ -53,16 +60,21 @@ export async function getMeetings(plugin: GolUpmeetPlugin): Promise<{ newMeeting
     let lastMeeting = "";
     let response: any
 
-    const url = "https://api.upmeet.ai/meetings";
-    const headers = {
-        'Accept': "application/json",
-        'X-Api-Token': plugin.settings.upmeetToken
-    };
+
+    let urlRequest: RequestUrlParam = {
+        url: "https://api.upmeet.ai/meetings",
+        headers: {
+            'Accept': "application/json",
+            'X-Api-Token': plugin.settings.upmeetToken
+        },
+        method: 'GET',
+    } ;    
+
 
     while (currentPage <= totalPages) {
         try {
             // Check if the token is valid by making a test request
-            response = await axios.get(`${url}?page=${currentPage}`, { headers });
+            response = await requestUrl(urlRequest).json;
         }
         catch (error) {
             console.error(`Error fetching meetings from Upmeet API: ${error}`);
@@ -70,7 +82,7 @@ export async function getMeetings(plugin: GolUpmeetPlugin): Promise<{ newMeeting
             return { newMeetings: [], lastMeetingDate: lastMeeting };
         }
 
-        const data = response.data;
+        const data = response;
         let tmpMeeting: Meeting;
 
         totalPages = data.totalPages;

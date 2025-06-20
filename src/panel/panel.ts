@@ -1,4 +1,4 @@
-import {  WorkspaceLeaf, ItemView, addIcon, base64ToArrayBuffer,setIcon,TFile  } from 'obsidian';
+import {  WorkspaceLeaf, ItemView, TFile  } from 'obsidian';
 import UpmeetPlugin from '../main';
 import { CUSTOM_ICON_ID } from '../main/icon';
 import { updatePanel, createPanel } from './panelfunctions';

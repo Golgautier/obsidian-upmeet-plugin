@@ -139,7 +139,7 @@ async function createNewNote(plugin: GolUpmeetPlugin, title: string, content: st
       if (plugin.settings.overwriteExistingNotes) {
         // If the file exists and overwrite is enabled, delete the existing file
         console.warn(`File ${filename} already exists. Overwriting...`);
-        await plugin.app.vault.delete(existingFile);
+        await plugin.app.fileManager.trashFile(existingFile);
       } else {
         // If the file exists and overwrite is not enabled, skip creating the note
         console.warn(`File ${filename} already exists. Skipping this meeting...`);

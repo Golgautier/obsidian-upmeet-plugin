@@ -17,7 +17,7 @@ function updateDetailsfromPanel(item: upmeetPanelView, file?: TFile) {
         
         // Check if a file is provided, if not, we display a message
         if(!file) {
-            detailsContentDiv.createEl('small', { text: t(item.language,"panelNotNoteSelected")});
+            detailsContentDiv.createEl('small', { text: t(item.language,"panelNoNoteSelected")});
             return;
         }
 
